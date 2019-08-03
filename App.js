@@ -1,19 +1,24 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react'
+import { Text, View } from 'react-native'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import reducer from './reducers'
+import DeckList from './components/DeckList'
+import { loadInitialDecks } from './utils/api'
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
+export default class App extends Component {
+  componentDidMount() {
+    loadInitialDecks()
+  }
+
+  render() {
+    return (
+      <Provider store={createStore(reducer)}>
+        <View>
+          <DeckList />
+        </View>
+      </Provider>
+    )
+  }
+
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
