@@ -10,17 +10,13 @@ class DeckList extends Component {
   }
 
   render() {
-    const { decks } = this.props
+    const { decks, loading } = this.props
 
     return (
       <View>
-        <Text>{decks}</Text>
-      </View>
-    )
-    /*
-    return (
-      <View>
-        {Object.keys(decks).map((id) => (
+        { loading === true
+          ? null
+          : Object.keys(decks).map((id) => (
           <Card key={id} bg="light" style={{ width: '18rem' }}>
             <Card.Body>
               <Card.Title>{decks[id].title}</Card.Title>
@@ -31,14 +27,14 @@ class DeckList extends Component {
         ))}
       </View>
     )
-    */
-  }
 
+  }
 
 }
 
 function mapStateToProps({ decks }) {
   return {
+    loading: Object.keys(decks).length === 0,
     decks
   }
 }

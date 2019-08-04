@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 import reducer from './reducers'
 import DeckList from './components/DeckList'
 import { loadInitialDecks } from './utils/api'
+import middleware from './middleware'
 
 export default class App extends Component {
   componentDidMount() {
@@ -13,7 +14,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <Provider store={createStore(reducer)}>
+      <Provider store={createStore(reducer, middleware)}>
         <View>
           <DeckList />
         </View>

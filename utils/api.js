@@ -1,15 +1,18 @@
 import { AsyncStorage } from 'react-native'
-import decks from './_data'
+import { _getDecks } from './_data'
 
 const DECKS_STORAGE_KEY = 'MobileFlashCards:decks'
 
 export function loadInitialDecks() {
-  AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(decks))
+  AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(_getDecks()))
 }
 
 // return all of the decks along with their titles, questions, and answers.
 export function getDecks() {
   return AsyncStorage.getItem(DECKS_STORAGE_KEY)
+    .then((decks) => (
+      JSON.parse(decks)
+    ))
 }
 
 // take in a single id argument and return the deck associated with that id.
