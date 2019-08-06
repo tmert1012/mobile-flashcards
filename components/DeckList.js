@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { Text, View, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
-import { Card } from 'react-bootstrap'
 import { handleReceiveDecks } from '../actions'
+import { ListItem } from 'react-native-elements'
 
 class DeckList extends Component {
   componentDidMount() {
@@ -17,22 +17,38 @@ class DeckList extends Component {
         { loading === true
           ? null
           : Object.keys(decks).map((id) => (
-          <Card key={id} bg="light" style={{ width: '18rem' }}>
-            <Card.Body>
-              <Card.Title>{decks[id].title}</Card.Title>
-              <Card.Body>
-              </Card.Body>
-            </Card.Body>
-          </Card>
-        ))}
+            <ListItem
+              key={id}
+              title={decks[id].title}
+              badge={{ value: decks[id].questions.length, textStyle: { color: 'orange' }, containerStyle: { marginTop: -20 } }}
+            />
+          ))}
       </View>
     )
-
   }
 
 }
 
-function mapStateToProps({ decks }) {
+const styles = StyleSheet.create({
+  cardContainer: {
+    flex: 1,
+    alignItems: "stretch",
+    justifyContent: "center",
+    backgroundColor: "white"
+  },
+  card: {
+    flex: 1,
+  },
+  title: {
+    fontSize: 20,
+  },
+  count: {
+    fontSize: 12,
+
+  }
+})
+
+function mapStateToProps(decks) {
   return {
     loading: Object.keys(decks).length === 0,
     decks
