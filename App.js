@@ -9,10 +9,9 @@ import middleware from './middleware'
 import { createAppContainer, createBottomTabNavigator, createMaterialTopTabNavigator, createStackNavigator } from 'react-navigation'
 import { white, purple } from './utils/colors'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
-import { Constants } from 'expo'
+import Constants from 'expo-constants'
 import DeckView from './components/DeckView'
-import AddCard from './components/AddCard'
-import MainHeader from './components/MainHeader'
+import AddDeck from './components/AddDeck'
 
 const Tabs = {
   DeckList: {
@@ -22,10 +21,10 @@ const Tabs = {
       tabBarIcon: ({ tintColor }) => <Ionicons name='ios-bookmarks' size={30} color={tintColor} />
     },
   },
-  AddCard: {
-    screen: AddCard,
+  AddDeck: {
+    screen: AddDeck,
     navigationOptions: {
-      tabBarLabel: 'Add Card',
+      tabBarLabel: 'Add Deck',
       tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square' size={30} color={tintColor} />
     },
   },
@@ -81,7 +80,9 @@ export default class App extends Component {
     return (
       <Provider store={createStore(reducer, middleware)}>
         <View style={{flex: 1}}>
-          <MainHeader />
+          <View style={{ backgroundColor: purple, height: Constants.statusBarHeight }}>
+            <StatusBar translucent backgroundColor={purple} barStyle="light-content" />
+          </View>
           <MainNavigator />
         </View>
       </Provider>

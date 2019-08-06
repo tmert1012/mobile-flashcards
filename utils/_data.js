@@ -1,5 +1,4 @@
-export function _getDecks() {
-  return {
+let decks = {
     React: {
       title: 'React',
       questions: [
@@ -23,4 +22,3 @@ export function _getDecks() {
       ]
     }
   }
-}

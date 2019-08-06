@@ -13,7 +13,7 @@ export function receiveDecks(decks) {
 export function handleReceiveDecks() {
   return (dispatch) => {
     return getDecks()
-      .then((decks) => {
+      .then(({decks}) => {
           dispatch(receiveDecks(decks))
       })
   }
