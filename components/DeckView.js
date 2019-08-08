@@ -4,11 +4,17 @@ import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
 import { Card, Button, Badge } from 'react-native-elements'
 import { purple, white, blue } from '../utils/colors'
+import { handleRemoveDeck } from '../actions'
 
 class DeckView extends Component {
 
+  handleDelete = (id) => {
+    this.props.dispatch(handleRemoveDeck(this.props.id))
+    this.props.navigation.goBack()
+  }
+
   render() {
-    const { deck } = this.props
+    const { deck, id } = this.props
 
     return (
       <Card title={deck.title}>
@@ -19,7 +25,10 @@ class DeckView extends Component {
         <Button
           buttonStyle={styles.button}
           title='Start Quiz' />
-        <Text style={styles.deleteDeck}>Delete Deck</Text>
+        <Text
+          style={styles.deleteDeck}
+          onPress={this.handleDelete}
+        >Delete Deck</Text>
       </Card>
     )
   }
@@ -48,6 +57,7 @@ function mapStateToProps(decks, { navigation }) {
 
   return {
     deck: decks[id],
+    id,
   }
 }
 
