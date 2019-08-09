@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View } from 'react-native'
 import { connect } from 'react-redux'
 import { handleReceiveDecks } from '../actions'
 import { ListItem } from 'react-native-elements'
@@ -41,25 +41,6 @@ class DeckList extends Component {
   }
 
 }
-
-const styles = StyleSheet.create({
-  cardContainer: {
-    flex: 1,
-    alignItems: "stretch",
-    justifyContent: "center",
-    backgroundColor: "white"
-  },
-  card: {
-    flex: 1,
-  },
-  title: {
-    fontSize: 20,
-  },
-  count: {
-    fontSize: 12,
-
-  }
-})
 
 function mapStateToProps(decks) {
   return {

@@ -43,13 +43,3 @@ export function addCardToDeck(id, card) {
       AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(data))
     })
 }
-
-/*
-// take in a single id argument and return the deck associated with that id.
-export function getDeck(id) {
-  return AsyncStorage.getItem(DECKS_STORAGE_KEY)
-    .then((decks) => ({
-      [id]: JSON.parse(decks)[id]
-    }))
-}
-*/

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, Platform, StatusBar } from 'react-native'
+import { View, Platform, StatusBar } from 'react-native'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
@@ -13,6 +13,8 @@ import Constants from 'expo-constants'
 import DeckView from './components/DeckView'
 import AddDeck from './components/AddDeck'
 import AddCard from './components/AddCard'
+import QuizView from './components/QuizView'
+import ScoreCard from './components/ScoreCard'
 
 const Tabs = {
   DeckList: {
@@ -74,7 +76,15 @@ const MainNavigator = createAppContainer(createStackNavigator({
   },
   AddCard: {
     screen: AddCard,
-    navigationOptions: ({ navigation }) => (navOptions),
+    navigationOptions: ({ navigation }) => ({ ...navOptions, title: 'Add Card' }),
+  },
+  QuizView: {
+    screen: QuizView,
+    navigationOptions: ({ navigation }) => ({ ...navOptions, title: 'Quiz' }),
+  },
+  ScoreCard: {
+    screen: ScoreCard,
+    navigationOptions: ({ navigation }) => ({ ...navOptions, title: 'Quiz Complete!' }),
   },
 }));
 

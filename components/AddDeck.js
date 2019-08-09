@@ -4,6 +4,7 @@ import { Card, Button, Input } from 'react-native-elements'
 import { purple } from '../utils/colors'
 import { connect } from 'react-redux'
 import { handleAddDeck } from '../actions'
+import { formatDeckKey } from '../utils/_data'
 
 class AddDeck extends Component {
   state = {
@@ -16,16 +17,21 @@ class AddDeck extends Component {
       }))
   }
 
-  handleSubmit = (e) => {
-      e.preventDefault()
+  handleSubmit = () => {
+      const id = formatDeckKey(this.state.title)
 
       this.props.dispatch(handleAddDeck(this.state.title))
+        .then((deck) => {
+          this.props.navigation.navigate(
+            'DeckView',
+            { id }
+          )
+        })
 
       this.setState(() => ({
-          title: '',
+        title: '',
       }))
 
-      this.props.navigation.goBack()
   }
 
   render() {

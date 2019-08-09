@@ -30,7 +30,12 @@ class DeckView extends Component {
         />
         <Button
           buttonStyle={styles.button}
-          title='Start Quiz' />
+          title='Start Quiz'
+          onPress={() => this.props.navigation.navigate(
+            'QuizView',
+            { 'id': id }
+          )}
+        />
         <Text
           style={styles.deleteDeck}
           onPress={this.handleDelete}
