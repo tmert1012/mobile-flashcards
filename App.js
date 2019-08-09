@@ -12,6 +12,7 @@ import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import Constants from 'expo-constants'
 import DeckView from './components/DeckView'
 import AddDeck from './components/AddDeck'
+import AddCard from './components/AddCard'
 
 const Tabs = {
   DeckList: {
@@ -53,6 +54,13 @@ const TabNav = createAppContainer(
     : createMaterialTopTabNavigator(Tabs, navigationOptions)
 )
 
+const navOptions = {
+  headerTintColor: white,
+  headerStyle: {
+    backgroundColor: purple,
+  },
+}
+
 const MainNavigator = createAppContainer(createStackNavigator({
   home: {
     screen: TabNav,
@@ -62,12 +70,11 @@ const MainNavigator = createAppContainer(createStackNavigator({
   },
   DeckView: {
     screen: DeckView,
-    navigationOptions: ({ navigation }) => ({
-      headerTintColor: white,
-      headerStyle: {
-        backgroundColor: purple,
-      },
-    }),
+    navigationOptions: ({ navigation }) => (navOptions),
+  },
+  AddCard: {
+    screen: AddCard,
+    navigationOptions: ({ navigation }) => (navOptions),
   },
 }));
 

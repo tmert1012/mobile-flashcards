@@ -1,4 +1,6 @@
-let initialDeckData = {
+
+export function getInitialDeckData() {
+  return {
     React: {
       title: 'React',
       questions: [
@@ -22,6 +24,7 @@ let initialDeckData = {
       ]
     }
   }
+}
 
 export function formatDeck(title) {
   const key = formatDeckKey(title)

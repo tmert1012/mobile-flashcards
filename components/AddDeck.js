@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { StyleSheet } from 'react-native'
-import { NavigationActions } from 'react-navigation'
 import { Card, Button, Input } from 'react-native-elements'
 import { purple } from '../utils/colors'
 import { connect } from 'react-redux'

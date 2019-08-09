@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { Text, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
-import { NavigationActions } from 'react-navigation'
-import { Card, Button, Badge } from 'react-native-elements'
-import { purple, white, blue } from '../utils/colors'
+import { Card, Button } from 'react-native-elements'
+import { purple, blue } from '../utils/colors'
 import { handleRemoveDeck } from '../actions'
 
 class DeckView extends Component {
 
-  handleDelete = (id) => {
-    this.props.dispatch(handleRemoveDeck(this.props.id))
-    this.props.navigation.goBack()
+  handleDelete = () => {
+    const { remove, goBack } = this.props
+
+    remove()
+    goBack()
   }
 
   render() {
@@ -21,7 +22,12 @@ class DeckView extends Component {
         <Text style={styles.cardCount}>{deck.questions.length} Cards</Text>
         <Button
           buttonStyle={styles.button}
-          title='Add Card' />
+          title='Add Card'
+          onPress={() => this.props.navigation.navigate(
+            'AddCard',
+            { 'id': id }
+          )}
+        />
         <Button
           buttonStyle={styles.button}
           title='Start Quiz' />
@@ -61,4 +67,13 @@ function mapStateToProps(decks, { navigation }) {
   }
 }
 
-export default connect(mapStateToProps)(DeckView)
+function mapDispatchToProps(dispatch, { navigation }) {
+  const { id } = navigation.state.params
+
+  return {
+    remove: () => dispatch(handleRemoveDeck(id)),
+    goBack: () => navigation.goBack(),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DeckView)
