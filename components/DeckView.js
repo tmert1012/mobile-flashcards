@@ -8,10 +8,15 @@ import { handleRemoveDeck } from '../actions'
 class DeckView extends Component {
 
   handleDelete = () => {
-    const { remove, goBack } = this.props
+    const { id } = this.props
 
-    remove()
-    goBack()
+    this.props.dispatch(handleRemoveDeck(id))
+      .then(() => {
+        this.props.navigation.navigate(
+          'DeckList'
+        )
+      })
+
   }
 
   render() {
@@ -72,13 +77,4 @@ function mapStateToProps(decks, { navigation }) {
   }
 }
 
-function mapDispatchToProps(dispatch, { navigation }) {
-  const { id } = navigation.state.params
-
-  return {
-    remove: () => dispatch(handleRemoveDeck(id)),
-    goBack: () => navigation.goBack(),
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(DeckView)
+export default connect(mapStateToProps)(DeckView)
