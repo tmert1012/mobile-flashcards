@@ -32,7 +32,7 @@ class DeckList extends Component {
               }}
               onPress={() => this.props.navigation.navigate(
                 'DeckView',
-                { 'id': id }
+                { id }
               )}
             />
           ))}

@@ -3,8 +3,14 @@ import { Card, Button } from 'react-native-elements'
 import { Text, StyleSheet } from 'react-native'
 import { purple } from '../utils/colors'
 import { withNavigation } from 'react-navigation'
+import { clearLocalNotification, setLocalNotification } from '../utils/notifications'
 
 class ScoreCard extends Component {
+
+  componentDidMount() {
+    clearLocalNotification()
+      .then(setLocalNotification)
+  }
 
   render() {
     const { correctCount, total, id } = this.props
@@ -31,6 +37,7 @@ class ScoreCard extends Component {
       </Card>
     )
   }
+
 }
 
 const styles = StyleSheet.create({

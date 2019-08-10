@@ -25,7 +25,7 @@ class DeckView extends Component {
           title='Add Card'
           onPress={() => this.props.navigation.navigate(
             'AddCard',
-            { 'id': id }
+            { id }
           )}
         />
         <Button
@@ -33,7 +33,7 @@ class DeckView extends Component {
           title='Start Quiz'
           onPress={() => this.props.navigation.navigate(
             'QuizView',
-            { 'id': id }
+            { id }
           )}
         />
         <Text

@@ -30,13 +30,15 @@ class AddCard extends Component {
       const { id } = this.props
 
       this.props.dispatch(handleAddCard(id, { question, answer }))
+        .then(() => {
+          this.props.navigation.goBack()
+        })
 
       this.setState(() => ({
         question: '',
         answer: '',
       }))
 
-      this.props.navigation.goBack()
   }
 
   render() {
@@ -45,10 +47,12 @@ class AddCard extends Component {
         <Input
           placeholder='Question'
           onChangeText={(text) => this.handleQuestionChange(text)}
+          value={this.state.question}
         />
         <Input
           placeholder='Answer'
           onChangeText={(text) => this.handleAnswerChange(text)}
+          value={this.state.answer}
         />
         <Button
           buttonStyle={styles.button}

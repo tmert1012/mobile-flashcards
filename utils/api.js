@@ -4,13 +4,11 @@ import { getInitialDeckData, formatDeck } from './_data'
 const DECKS_STORAGE_KEY = 'MobileFlashCards:decks'
 
 export function loadInitialDecks() {
-  console.log('loadInitialDecks()')
-  AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(getInitialDeckData()))
+  return AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(getInitialDeckData()))
 }
 
 // return all of the decks along with their titles, questions, and answers.
 export function getDecks() {
-  console.log('getDecks()')
   return AsyncStorage.getItem(DECKS_STORAGE_KEY)
     .then((data) => ({
       decks: JSON.parse(data)

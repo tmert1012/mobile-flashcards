@@ -40,6 +40,7 @@ class AddDeck extends Component {
         <Input
           placeholder='Enter a title'
           onChangeText={(text) => this.handleTitleChange(text)}
+          value={this.state.title}
         />
         <Button
           buttonStyle={styles.button}

@@ -15,6 +15,8 @@ import AddDeck from './components/AddDeck'
 import AddCard from './components/AddCard'
 import QuizView from './components/QuizView'
 import ScoreCard from './components/ScoreCard'
+import { setLocalNotification } from './utils/notifications'
+
 
 const Tabs = {
   DeckList: {
@@ -91,6 +93,7 @@ const MainNavigator = createAppContainer(createStackNavigator({
 export default class App extends Component {
   componentDidMount() {
     loadInitialDecks()
+      .then(setLocalNotification)
   }
 
   render() {
