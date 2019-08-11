@@ -59,7 +59,7 @@ function mapStateToProps(decks, { navigation }) {
   return {
     id,
     correctCount,
-    total
+    total,
   }
 }
 

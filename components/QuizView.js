@@ -46,7 +46,7 @@ class QuizView extends Component {
       this.props.navigation.navigate(
         'ScoreCard',
         { id,
-          newCorrectCount,
+          correctCount: newCorrectCount,
           total: questions.length
         }
       )
