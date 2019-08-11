@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { Card, Button } from 'react-native-elements'
 import { Text, StyleSheet } from 'react-native'
 import { purple } from '../utils/colors'
-import { withNavigation } from 'react-navigation'
 import { clearLocalNotification, setLocalNotification } from '../utils/notifications'
+import { connect } from 'react-redux'
 
 class ScoreCard extends Component {
 
@@ -53,4 +53,14 @@ const styles = StyleSheet.create({
   },
 })
 
-export default withNavigation(ScoreCard)
+function mapStateToProps(decks, { navigation }) {
+  const { id, correctCount, total } = navigation.state.params
+
+  return {
+    id,
+    correctCount,
+    total
+  }
+}
+
+export default connect(mapStateToProps)(ScoreCard)

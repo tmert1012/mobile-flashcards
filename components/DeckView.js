@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet } from 'react-native'
+import { Text, StyleSheet, View } from 'react-native'
 import { connect } from 'react-redux'
 import { Card, Button } from 'react-native-elements'
 import { purple, blue } from '../utils/colors'
@@ -11,42 +11,46 @@ class DeckView extends Component {
     const { id } = this.props
 
     this.props.dispatch(handleRemoveDeck(id))
-      .then(() => {
-        this.props.navigation.navigate(
-          'DeckList'
-        )
-      })
-
+    this.props.navigation.navigate(
+      'DeckList'
+    )
   }
 
   render() {
-    const { deck, id } = this.props
+    const { deck, id, haveDeckData } = this.props
 
     return (
-      <Card title={deck.title}>
-        <Text style={styles.cardCount}>{deck.questions.length} Cards</Text>
-        <Button
-          buttonStyle={styles.button}
-          title='Add Card'
-          onPress={() => this.props.navigation.navigate(
-            'AddCard',
-            { id }
-          )}
-        />
-        <Button
-          buttonStyle={styles.button}
-          title='Start Quiz'
-          onPress={() => this.props.navigation.navigate(
-            'QuizView',
-            { id }
-          )}
-        />
-        <Text
-          style={styles.deleteDeck}
-          onPress={this.handleDelete}
-        >Delete Deck</Text>
-      </Card>
+      <View>
+      { !haveDeckData
+        ? null
+        :
+        <Card title={deck.title}>
+          <Text style={styles.cardCount}>{deck.questions.length} Cards</Text>
+          <Button
+            buttonStyle={styles.button}
+            title='Add Card'
+            onPress={() => this.props.navigation.navigate(
+              'AddCard',
+              { id }
+            )}
+          />
+          <Button
+            buttonStyle={styles.button}
+            title='Start Quiz'
+            onPress={() => this.props.navigation.navigate(
+              'QuizView',
+              { id }
+            )}
+          />
+          <Text
+            style={styles.deleteDeck}
+            onPress={this.handleDelete}
+          >Delete Deck</Text>
+        </Card>
+      }
+      </View>
     )
+
   }
 
 }
@@ -74,6 +78,7 @@ function mapStateToProps(decks, { navigation }) {
   return {
     deck: decks[id],
     id,
+    haveDeckData: decks[id] ? true : false,
   }
 }
 

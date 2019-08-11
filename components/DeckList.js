@@ -1,14 +1,10 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
 import { connect } from 'react-redux'
-import { handleReceiveDecks } from '../actions'
 import { ListItem } from 'react-native-elements'
 import { orange, white } from '../utils/colors'
 
 class DeckList extends Component {
-  componentDidMount() {
-    this.props.dispatch(handleReceiveDecks())
-  }
 
   render() {
     const { decks, loading } = this.props

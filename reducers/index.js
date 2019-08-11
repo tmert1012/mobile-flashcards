@@ -1,4 +1,5 @@
 import { RECEIVE_DECKS, ADD_DECK, REMOVE_DECK, ADD_CARD } from '../actions'
+import { omit } from 'lodash'
 
 function decks (state = {}, action) {
   switch (action.type) {
@@ -16,10 +17,7 @@ function decks (state = {}, action) {
       }
 
     case REMOVE_DECK:
-      let data = state
-      data[action.key] = undefined
-      delete data[action.key]
-      return data
+      return omit(state, action.key)
 
     case ADD_CARD:
       const { id, card } = action

@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Card, Button } from 'react-native-elements'
 import { View, Text, StyleSheet } from 'react-native'
 import { purple, blue } from '../utils/colors'
-import ScoreCard from './ScoreCard';
 
 function NoCardsView() {
   return (
@@ -30,11 +29,36 @@ class QuizView extends Component {
   }
 
   submitAnswer = (correct) => {
-    this.setState((prevState) => ({
+    const { questions, id } = this.props
+    const nextQID = this.state.qid + 1
+    const newCorrectCount = (correct) ? this.state.correctCount + 1 : this.state.correctCount
+
+    this.setState(() => ({
       view: viewQuestion,
-      qid: prevState.qid + 1,
-      correctCount: (correct) ? prevState.correctCount + 1 : prevState.correctCount,
+      qid: nextQID,
+      correctCount: newCorrectCount,
     }))
+
+    // end of quiz
+    if (questions.length === nextQID) {
+
+      // show scorecard
+      this.props.navigation.navigate(
+        'ScoreCard',
+        { id,
+          newCorrectCount,
+          total: questions.length
+        }
+      )
+
+      // reset quiz
+      this.setState(() => ({
+        view: viewQuestion,
+        qid: 0,
+        correctCount: 0,
+      }))
+    }
+
   }
 
   render() {
@@ -46,7 +70,7 @@ class QuizView extends Component {
       return (<NoCardsView />)
 
     if (questions.length === qid)
-      return (<ScoreCard id={id} correctCount={correctCount} total={questions.length} />)
+      return (<View></View>)
 
     return (
       <Card>

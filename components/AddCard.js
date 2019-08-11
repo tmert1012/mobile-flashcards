@@ -30,9 +30,8 @@ class AddCard extends Component {
       const { id } = this.props
 
       this.props.dispatch(handleAddCard(id, { question, answer }))
-        .then(() => {
-          this.props.navigation.goBack()
-        })
+
+      this.props.navigation.goBack()
 
       this.setState(() => ({
         question: '',

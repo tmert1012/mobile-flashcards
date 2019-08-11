@@ -1,11 +1,7 @@
 import { AsyncStorage } from 'react-native'
-import { getInitialDeckData, formatDeck } from './_data'
+import { formatDeck } from './_data'
 
 const DECKS_STORAGE_KEY = 'MobileFlashCards:decks'
-
-export function loadInitialDecks() {
-  return AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(getInitialDeckData()))
-}
 
 // return all of the decks along with their titles, questions, and answers.
 export function getDecks() {
@@ -36,8 +32,8 @@ export function removeDeckKey(key) {
 export function addCardToDeck(id, card) {
   return AsyncStorage.getItem(DECKS_STORAGE_KEY)
     .then((results) => {
-      const data = JSON.parse(results)
-      data[id].questions.concat(card)
+      let data = JSON.parse(results)
+      data[id].questions.push(card)
       AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(data))
     })
 }
